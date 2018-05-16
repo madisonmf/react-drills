@@ -4,52 +4,48 @@ import './App.css';
 import Todo from './Todo';
 
 class App extends Component {
-  constructor () {
-    super ();
+  constructor() {
+    super();
 
     this.state = {
       list: [],
       input: ''
-    };
-    this.handleAddTask = this.handleAddTask.bind( this );
-  }
+    }
 
-  handleInputChange ( value ) {
-    this.setState({ input: value });
+    this.handleAddTask = this.handleAddTask.bind(this);
   }
-
-  handleAddTask () {
+  
+  handleInputChange(value){
     this.setState({
-      list: [...this.state.list, this.state.input ],
+      input: value
+    });
+  }
+  handleAddTask(){
+    this.setState({
+      list: [...this.state.list, this.state.input],
       input: ''
     });
   }
 
-  render() {
-    let list = this.state.list.map(( element, index ) => {
+  render () {
+    let list = this.state.list.map((element, index) => {
       return (
-        <Todo key={ index } task={ element } />
+        <Todo key={ index } task={ element }/>
       )
     })
 
     return (
       <div className="App">
-        <h1>My to-do list:</h1>
-
-        <div> 
-          <input value={ this.state.input }
+        <h1>My To-Do List:</h1>
+        <div>
+          <input value={this.state.input}
             placeholder="Enter new task"
-            onChange={ (e) => this.handleInputChange( e.target.value ) }
-          />
-
+            onChange={ event => this.handleInputChange(event.target.value)} />
           <button onClick={ this.handleAddTask }>Add</button>
+        </div>
+        <br />
+        { list }
       </div>
-
-      <br />
-      
-      { list }   
-    </div>
-
     );
   }
 }
